@@ -11,22 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith
  * Additionally, this annotation installs [DebugProbes](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-debug/kotlinx.coroutines.debug/-debug-probes/index.html)
  * and dumps all coroutines on timeout failure.
  *
- * Example of usage:
- * ```
- * @CoroutinesTimeout(timeout = "PT1S")
- * class TimeConsumingTest {
- *    @CoroutinesTimeout(timeout = "PT2S")
- *    @Test
- *    fun testOverrideTimeout() {
- *        runBlocking { delay(1500) }
- *    }
- *
- *    @Test
- *    fun test() {
- *        runBlocking { delay(800) }
- *    }
- * }
- * ```
  * @property timeout [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) format string.
  * @property cancelOnTimeout Whether suspended coroutines should be cancelled on timeout. Note that the stacktrace dump, if enabled, is taken prior to the cancellations.
  * @property enableCreationStackTraces See [DebugProbes.enableCreationStackTraces](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-debug/kotlinx.coroutines.debug/-debug-probes/enable-creation-stack-traces.html).

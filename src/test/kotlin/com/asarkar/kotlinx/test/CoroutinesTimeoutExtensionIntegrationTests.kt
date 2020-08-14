@@ -71,11 +71,6 @@ class CoroutinesTimeoutExtensionIntegrationTests {
                     )
                 )
             )
-
-        events.failed()
-            .list()
-            .map { it.toString() }
-            .forEach(::println)
     }
 
     @Test

@@ -16,7 +16,41 @@ It is also on Maven Central and jcenter.
 
 ## Usage
 
-See KDoc.
+The simplest way to get started:
+
+```
+@CoroutinesTimeout(timeout = "PT1S")
+class TimeConsumingTest {
+    @CoroutinesTimeout(timeout = "PT2S")
+    @Test
+    fun testOverrideTimeout() {
+        runBlocking { delay(1500) }
+    }
+
+    @Test
+    fun test() {
+        runBlocking { delay(800) }
+    }
+}
+```
+
+See KDoc for more details.
+
+Sample coroutines dump:
+
+```
+Coroutines dump 2020/08/14 16:21:18
+
+Coroutine "coroutine#1":BlockingCoroutine{Active}@78383390, state: SUSPENDED
+    at com.asarkar.kotlinx.test.ClassLevelTimeout$testTimeout$1.invokeSuspend(ClassLevelTimeout.kt:16)
+	(Coroutine creation stacktrace)
+	...
+	at com.asarkar.kotlinx.test.ClassLevelTimeout.testTimeout(ClassLevelTimeout.kt:16)
+	...
+	at com.asarkar.kotlinx.test.CoroutinesTimeoutExtension$interceptTestMethod$testResult$1.call(CoroutinesTimeoutExtension.kt:30)
+	...
+	at java.base/java.lang.Thread.run(Thread.java:834)
+```
 
 ## Contribute
 
