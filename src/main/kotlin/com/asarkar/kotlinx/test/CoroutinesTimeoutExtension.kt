@@ -94,7 +94,7 @@ class CoroutinesTimeoutExtension : BeforeAllCallback, InvocationInterceptor {
                 DebugProbes.dumpCoroutines(stdout)
                 /*
                  * Order is important:
-                 * 1) Create exception with a stacktrace of hang test
+                 * 1) Create exception with a stacktrace of hung test
                  * 2) Cancel all coroutines
                  * 3) Throw created exception
                  */
@@ -112,6 +112,7 @@ class CoroutinesTimeoutExtension : BeforeAllCallback, InvocationInterceptor {
                     // Publishing empty value throws exception
                     baos?.takeIf { it.size() > 0 }?.also {
                         extensionContext.publishReportEntry("dump", it.toString("UTF-8"))
+                        it.close()
                     }
                     stdout.close()
                 }
